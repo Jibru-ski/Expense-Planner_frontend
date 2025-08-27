@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import { Provider} from './components/ui/provider'
 
 function App() {
   return (
+    <Provider>
       <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
@@ -14,6 +16,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
+    </Provider>
   )
 }
 
