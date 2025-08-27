@@ -1,4 +1,5 @@
 import React from 'react'
+import { registerService } from '../api/authservice';
 
 const Register = () => {
     const [username, setUsername] = React.useState('');
@@ -12,7 +13,7 @@ const Register = () => {
         const password = e.target.password.value;
 
         try {
-            const response = await register({ username, email, password });
+            const response = await registerService({ username, email, password });
             localStorage.setItem('token', response.token);
             window.location.href = '/login';
         } catch (error) {

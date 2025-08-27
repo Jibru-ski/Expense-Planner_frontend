@@ -1,5 +1,5 @@
 import React from 'react'
-import { login } from '../api/authservice'
+import { loginService } from '../api/authservice'
 
 const login = () => {
     const [username, setUsername] = React.useState('');
@@ -11,7 +11,7 @@ const login = () => {
         const password = e.target.password.value;
 
         try {
-            const response = await login({ username, password });
+            const response = await loginService({ username, password });
             localStorage.setItem('token', response.token);
             window.location.href = '/dashboard';
         } catch (error) {
