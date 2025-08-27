@@ -7,11 +7,12 @@ const login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const username = e.target.email.value;
-        const password = e.target.password.value;
-
         try {
-            const response = await loginService({ username, password });
+            const userData = {
+                username,
+                password
+            };
+            const response = await loginService(userData);
             localStorage.setItem('token', response.token);
             window.location.href = '/dashboard';
         } catch (error) {

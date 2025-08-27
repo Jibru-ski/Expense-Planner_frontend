@@ -1,8 +1,8 @@
 import api from "./api"
 
-export async function registerService(username, email, password) {
+export async function registerService(userData) {
     try {
-        const res = await api.post("/auth/register", { username, email, password })
+        const res = await api.post("/auth/register", userData)
         return res.data   
     } catch (error) {
         console.error("Registration error:", error.response?.data || error.message)
@@ -11,9 +11,9 @@ export async function registerService(username, email, password) {
   
 }
 
-export async function loginService(username, password) {
+export async function loginService(userData) {
     try {
-        const res = await api.post("/auth/login", { username, password })
+        const res = await api.post("/auth/login", userData)
         return res.data   
     } catch (error) {
         console.error("Login error:", error.response?.data || error.message)

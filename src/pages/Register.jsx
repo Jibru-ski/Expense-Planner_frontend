@@ -8,12 +8,14 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        const username = e.target.username.value;
-        const email = e.target.email.value;
-        const password = e.target.password.value;
 
         try {
-            const response = await registerService({ username, email, password });
+            const userData = {
+                username,
+                email,
+                password
+            };
+            const response = await registerService(userData);
             localStorage.setItem('token', response.token);
             window.location.href = '/login';
         } catch (error) {
