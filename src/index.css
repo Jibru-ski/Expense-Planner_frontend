@@ -4,6 +4,9 @@
   @apply fixed top-0 left-0 h-full w-53 border-r text-white z-40;
 }
 
+.transaction-board{
+  @apply border-1 rounded-2xl p-2 mt-1.5
+}
 .bx{
     @apply text-[20px] mr-1.5;
 }
