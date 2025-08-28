@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .sidebar {
-  @apply fixed top-0 left-0 h-full w-55 border-r text-white z-40;
+  @apply fixed top-0 left-0 h-full w-53 border-r text-white z-40;
 }
 
 .bx{
@@ -10,4 +10,11 @@
 
 main {
   @apply ml-60 p-6;
+}
+
+.sidebar-header {
+  @apply p-3 border-b;
+}
+.sidebar-header2 {
+  @apply p-3;
 }
