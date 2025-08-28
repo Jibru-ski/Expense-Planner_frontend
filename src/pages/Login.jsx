@@ -27,6 +27,10 @@ const login = () => {
         <form onSubmit={handleLogin}>
             <Stack spacing={4} mb={4}>
             <div>
+                <Text fontSize="3xl" fontWeight="bold" textAlign="center">Welcome Back</Text>
+                <Text mb={6} fontSize="md" textAlign="center" color="gray.500">Login to your account</Text>
+            </div>
+            <div>
                 <InputGroup startElement={<LuUser/>}>
                     <Input 
                         type="text" 
@@ -51,7 +55,7 @@ const login = () => {
                 </InputGroup>
             </div>
             <Button variant="surface" type="submit">Login</Button>
-            <Text mt={3}>Don't have an account? <Link href='/register' colorPalette="teal">Signup</Link></Text>
+            <Text className='text-center' mt={3}>Don't have an account? <Link href='/register' colorPalette="teal">Signup</Link></Text>
             </Stack>
         </form> 
     </div>

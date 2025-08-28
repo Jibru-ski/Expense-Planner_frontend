@@ -8,17 +8,9 @@ const Register = () => {
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [confirmpassword, setConfirmPassword] = React.useState('');
-    const [passerror, setPassError] = React.useState('');
-
+    const [confirm, setConfirm] = React.useState('');
     const handleRegister = async (e) => {
         e.preventDefault();
-        setPassError('');
-
-        if (password !== confirmpassword) {
-            setError("Passwords do not match");
-            return;
-        }
 
         try {
             const userData = {
@@ -41,7 +33,10 @@ const Register = () => {
     <div className="w-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 border rounded-lg shadow-lg">
         <form onSubmit={handleRegister}>
         <Stack spacing={4} mb={4}>
-            <Text colorPalette="red">{passerror}</Text>
+            <div>
+                <Text fontSize="3xl" fontWeight="bold" textAlign="center">Create Your Account</Text>
+                <Text mb={6} fontSize="md" textAlign="center" color="gray.500">Join us and start your journey today!</Text>
+            </div>
             <div className="flex gap-2">
                 <div className='w-1/2'>
                     <Input 
@@ -98,15 +93,15 @@ const Register = () => {
             <div>
                 <Input 
                     type="password" 
-                    value={confirmpassword} 
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={confirm} 
+                    onChange={(e) => setConfirm(e.target.value)}
                     name="confirmpassword"
                     placeholder="Confirm Password"
                     required 
                 />
             </div>
             <Button variant="surface" type="submit">Register</Button>
-            <Text mt={3}>Already have an account? <Link href='/login' colorPalette="teal">Login</Link></Text>
+            <Text className='text-center' mt={3}>Already have an account? <Link href='/login' colorPalette="teal">Login</Link></Text>
         </Stack>
         </form>
     </div>
