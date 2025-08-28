@@ -27,7 +27,7 @@ const Sidebar = () => {
         <nav>
             <Stack spacing={4} w={180}>
                 <Button justifyContent="start" pl={8} size='sm' variant='outline' href='#'><i class='bx bxs-dashboard'></i>Dashboard</Button>
-                <Button justifyContent="start" pl={8} size='sm' variant='outline' href='#'><i class='bx bx-money-withdraw' ></i>Transactions</Button>
+                <Button justifyContent="start" pl={8} size='sm' variant='outline' href='#'><i class='bx bx-credit-card'></i>Transactions</Button>
                 <Button justifyContent="start" pl={8} size='sm' variant='outline' href='#'><i class='bx bxs-bank' ></i>Accounts</Button>
                 <Button justifyContent="start" pl={8} size='sm' variant='outline' href='#'><i class='bx bxs-calculator' ></i>Calculators</Button>
                 <Button justifyContent="start" pl={8} size='sm' variant='outline' href='#'><i class='bx bx-line-chart' ></i>Analytics</Button>

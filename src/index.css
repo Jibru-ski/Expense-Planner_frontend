@@ -18,3 +18,9 @@ main {
 .sidebar-header2 {
   @apply p-3;
 }
+.stat-card{
+  @apply w-[220px] p-5 rounded-3xl text-white border-1;
+}
+.welcome-message{
+  @apply text-2xl font-medium mb-8;
+}
