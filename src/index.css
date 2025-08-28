@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
 .sidebar {
-  @apply fixed top-0 left-0 h-full w-60 border-r text-white;
+  @apply fixed top-0 left-0 h-full w-55 border-r text-white;
+}
+
+.bx{
+    @apply text-[20px] mr-1.5;
 }

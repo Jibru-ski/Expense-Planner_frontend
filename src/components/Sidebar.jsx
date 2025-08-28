@@ -1,24 +1,25 @@
 import React from 'react'
-import { Avatar, HStack, Link, Stack, Text } from '@chakra-ui/react'
+import { Avatar, VStack, Link, Stack, Text, Button } from '@chakra-ui/react'
 
 const Sidebar = () => {
   return (
-    <div className='fixed top-0 left-0 h-full w-55 '>
-    <HStack p={3} flexDirection={"column"} justifyContent="space-between" alignItems="start" height="100%">
+    <div className='sidebar'>
+    <VStack p={3} justifyContent="space-between" alignItems='center' height="100%">
         <div>
             <Text fontSize="xl" fontWeight="bold" mb="8">Expense Planner</Text>
         </div>
         <nav>
-            <Stack alignItems="start">
-                <Link p={1} href='#'>Dashboard</Link>
-                <Link p={1} href='#'>Transactions</Link>
-                <Link p={1} href='#'>Accounts</Link>
-                <Link p={1} href='#'>Calculators</Link>
-                <Link p={1} href='#'>Settings</Link>
+            <Stack spacing={4} w={200}>
+                <Button size='sm' variant='outline' href='#'><i class='bx bxs-dashboard'></i>Dashboard</Button>
+                <Button size='sm' variant='outline' href='#'><i class='bx bx-money-withdraw' ></i>Transactions</Button>
+                <Button size='sm' variant='outline' href='#'><i class='bx bxs-bank' ></i>Accounts</Button>
+                <Button size='sm' variant='outline' href='#'><i class='bx bxs-calculator' ></i>Calculators</Button>
+                <Button size='sm' variant='outline' href='#'><i class='bx bx-line-chart' ></i>Analytics</Button>
+                <Button size='sm' variant='outline' href='#'><i class='bx bx-cog' ></i>Settings</Button>
             </Stack>
         </nav>
         <div className="flex items-center">
-            <Link href="#">
+            <Button variant='plain' href="#" size='lg'>
                 <Avatar.Root>
                     <Avatar.Image 
                         src="https://bit.ly/broken-link" 
@@ -29,9 +30,9 @@ const Sidebar = () => {
                     <Avatar.Fallback name="User"/>
                 </Avatar.Root>
                 <Text p={1} fontSize="sm">Username</Text>
-            </Link>
+            </Button>
         </div>
-    </HStack>
+    </VStack>
     </div>
   )
 }
