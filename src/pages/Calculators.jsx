@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Stack, Field, Button, Input, InputGroup, NativeSelect, Stat, Text, HStack, VStack } from '@chakra-ui/react'
+import { Card, Stack, Field, Button, Input, InputGroup, NativeSelect, Stat, Text, HStack } from '@chakra-ui/react'
 
 const Calculators = () => {
   const [activeCalculator, setActiveCalculator] = React.useState('simple-interest');
@@ -187,6 +187,72 @@ const Calculators = () => {
                       <Stat.Root>
                           <Stat.Label>Simple Interest</Stat.Label>
                           <Stat.ValueText fontSize={30}>{simpleInterest.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+              </Card.Body>
+            </Card.Root>
+          </HStack>
+        )}
+        {activeCalculator == 'compound-interest' && (
+          <HStack gap={8} alignItems='baseline'>
+            <Card.Root w={500}>
+              <Card.Header>
+                  <Card.Title>Compound Interest Calculator</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                  <Stack gap="4" w="full">
+                      <Field.Root>
+                          <InputGroup endElement="USD">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.00'
+                                  value={compoundInterest.principal}
+                                  onChange={(e) => setCompoundInterest(prev => ({...prev, principal: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      <Field.Root>
+                          <InputGroup endElement="%">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.0'
+                                  value={compoundInterest.rate}
+                                  onChange={(e) => setCompoundInterest(prev => ({...prev, rate: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      <Field.Root>
+                          <InputGroup endElement={<DomainSelect />}>
+                              <Input 
+                                  type='number'
+                                  placeholder='0.0'
+                                  value={compoundInterest.time}
+                                  onChange={(e) => setCompoundInterest(prev => ({...prev, time: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                  </Stack>
+              </Card.Body>
+              <Card.Footer justifyContent="flex-end">
+                  <Button variant="outline">Clear</Button>
+                  <Button variant="solid" onClick={() => calculateCompoundInterest()} >Calculate</Button>
+              </Card.Footer>
+            </Card.Root>
+            <Card.Root w={300} mt={3}>
+              <Card.Header>
+                  <Card.Title>Result</Card.Title>
+              </Card.Header>
+              <Card.Body gap={4}>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Amount</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{compoundInterest.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Compound Interest</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{compoundInterest.totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
                       </Stat.Root>
                   </Field.Root>
               </Card.Body>
