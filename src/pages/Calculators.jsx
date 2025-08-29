@@ -242,7 +242,7 @@ const Calculators = () => {
               <Card.Header>
                   <Card.Title>Result</Card.Title>
               </Card.Header>
-              <Card.Body gap={4}>
+              <Card.Body gap={3}>
                   <Field.Root>
                       <Stat.Root>
                           <Stat.Label>Amount</Stat.Label>
@@ -253,6 +253,78 @@ const Calculators = () => {
                       <Stat.Root>
                           <Stat.Label>Compound Interest</Stat.Label>
                           <Stat.ValueText fontSize={30}>{compoundInterest.totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+              </Card.Body>
+            </Card.Root>
+          </HStack>
+        )}
+        {activeCalculator == 'loan' && (
+          <HStack gap={8} alignItems='baseline'>
+            <Card.Root w={500}>
+              <Card.Header>
+                  <Card.Title>Loan Calculator</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                  <Stack gap="4" w="full">
+                      <Field.Root>
+                          <InputGroup endElement="USD">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.00'
+                                  value={loanCalculator.principal}
+                                  onChange={(e) => setLoanCalculator(prev => ({...prev, principal: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      <Field.Root>
+                          <InputGroup endElement="%">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.0'
+                                  value={loanCalculator.rate}
+                                  onChange={(e) => setLoanCalculator(prev => ({...prev, rate: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      <Field.Root>
+                          <InputGroup endElement="terms">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.0'
+                                  value={loanCalculator.term}
+                                  onChange={(e) => setLoanCalculator(prev => ({...prev, term: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                  </Stack>
+              </Card.Body>
+              <Card.Footer justifyContent="flex-end">
+                  <Button variant="outline">Clear</Button>
+                  <Button variant="solid" onClick={() => calculateLoan()} >Calculate</Button>
+              </Card.Footer>
+            </Card.Root>
+            <Card.Root w={300} mt={3}>
+              <Card.Header>
+                  <Card.Title>Result</Card.Title>
+              </Card.Header>
+              <Card.Body gap={3}>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Monthly Payment</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{loanCalculator.monthlyPayment.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Total Interest</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{loanCalculator.totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Total Amount</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{loanCalculator.totalAmount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
                       </Stat.Root>
                   </Field.Root>
               </Card.Body>
