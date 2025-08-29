@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Stack, Field, Button, Input, InputGroup, NativeSelect, Stat, Text, HStack } from '@chakra-ui/react'
+import { i } from 'framer-motion/m';
 
 const Calculators = () => {
   const [activeCalculator, setActiveCalculator] = React.useState('simple-interest');
@@ -83,23 +84,37 @@ const Calculators = () => {
   }
 
   const calculateInvestment = () => {
-    const initial = Number.parseFloat(investmentCalculator.initialAmount);
-    const monthly = Number.parseFloat(investmentCalculator.monthlyContribution);
-    const rate = Number.parseFloat(investmentCalculator.expectedReturn) / 100 / 12;
-    const months = Number.parseFloat(investmentCalculator.expectedReturn) * 12;
+  const initial = Number.parseFloat(investmentCalculator.initialAmount);
+  const monthly = Number.parseFloat(investmentCalculator.monthlyContribution);
+  const rate = Number.parseFloat(investmentCalculator.expectedReturn) / 100 / 12;
+  const years = Number.parseFloat(investmentCalculator.investmentPeriod);
+  const months = years * 12;
 
-    if(initial >= 0 && monthly >= 0 && rate && months){
-      const futureValueInitial = initial * (1 / rate) ** months;
-      const futureValueMonthly = monthly * (((1 + rate) ** months - 1) / rate);
-      const futureValue = futureValueInitial + futureValueMonthly;
-      const totalContributions = initial + (monthly * months);
-      const totalEarnings = futureValue - totalContributions;
+  if (initial >= 0 && monthly >= 0 && years > 0) {
+    let futureValueInitial, futureValueMonthly;
 
-      setInvestmentCalculator(prev => ({
-        ...prev, futureValue, totalContributions, totalEarnings
-      }))
+    if (rate > 0) {
+      futureValueInitial = initial * (1 + rate) ** months;
+      futureValueMonthly = monthly * (((1 + rate) ** months - 1) / rate);
+
+    } else {
+      futureValueInitial = initial;
+      futureValueMonthly = monthly * months;
     }
+
+    const futureValue = futureValueInitial + futureValueMonthly;
+    const totalContributions = initial + (monthly * months);
+    const totalEarnings = futureValue - totalContributions;
+
+    setInvestmentCalculator(prev => ({
+      ...prev,
+      futureValue,
+      totalContributions,
+      totalEarnings,
+    }));
   }
+};
+
 
   const calculatorTypes = [
     {id: 'simple-interest', name: 'Simple Interest'},
@@ -291,7 +306,7 @@ const Calculators = () => {
                           <InputGroup endElement="terms">
                               <Input 
                                   type='number'
-                                  placeholder='0.0'
+                                  placeholder='0'
                                   value={loanCalculator.term}
                                   onChange={(e) => setLoanCalculator(prev => ({...prev, term: e.target.value}))}
                               />
@@ -325,6 +340,82 @@ const Calculators = () => {
                       <Stat.Root>
                           <Stat.Label>Total Amount</Stat.Label>
                           <Stat.ValueText fontSize={30}>{loanCalculator.totalAmount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+              </Card.Body>
+            </Card.Root>
+          </HStack>
+        )}
+        {activeCalculator == 'investment' && (
+          <HStack gap={8} alignItems='baseline'>
+            <Card.Root w={500}>
+              <Card.Header>
+                  <Card.Title>Investment Growth Calculator</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                  <Stack gap="4" w="full">
+                      <Field.Root>
+                          <Field.Label>Initial Amount</Field.Label>
+                          <InputGroup endElement="USD">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.00'
+                                  value={investmentCalculator.initialAmount}
+                                  onChange={(e) => setInvestmentCalculator(prev => ({...prev, initialAmount: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      <Field.Root>
+                          <Field.Label>Monthly Contribution</Field.Label>
+                          <InputGroup endElement="USD">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.00'
+                                  value={investmentCalculator.monthlyContribution}
+                                  onChange={(e) => setInvestmentCalculator(prev => ({...prev, monthlyContribution: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      <Field.Root>
+                          <Field.Label>Expected Return</Field.Label>
+                          <InputGroup endElement="USD">
+                              <Input 
+                                  type='number'
+                                  placeholder='0.00'
+                                  value={investmentCalculator.expectedReturn}
+                                  onChange={(e) => setInvestmentCalculator(prev => ({...prev, expectedReturn: e.target.value}))}
+                              />
+                          </InputGroup>
+                      </Field.Root>
+                      
+                  </Stack>
+              </Card.Body>
+              <Card.Footer justifyContent="flex-end">
+                  <Button variant="outline">Clear</Button>
+                  <Button variant="solid" onClick={() => calculateInvestment()} >Calculate</Button>
+              </Card.Footer>
+            </Card.Root>
+            <Card.Root w={300} mt={3}>
+              <Card.Header>
+                  <Card.Title>Result</Card.Title>
+              </Card.Header>
+              <Card.Body gap={3}>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Total Contribution</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{investmentCalculator.totalContributions.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Future Value</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{investmentCalculator.futureValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
+                      </Stat.Root>
+                  </Field.Root>
+                  <Field.Root>
+                      <Stat.Root>
+                          <Stat.Label>Total Earnings</Stat.Label>
+                          <Stat.ValueText fontSize={30}>{investmentCalculator.totalEarnings.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Stat.ValueText>
                       </Stat.Root>
                   </Field.Root>
               </Card.Body>
