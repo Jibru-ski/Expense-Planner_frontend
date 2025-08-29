@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 .sidebar {
   @apply fixed top-0 left-0 h-full w-53 border-r text-white z-40;
 }
@@ -23,7 +30,4 @@ main {
 }
 .stat-card{
   @apply w-[220px] p-5 rounded-3xl text-white border-1;
-}
-.welcome-message{
-  @apply text-2xl font-medium mb-8;
 }

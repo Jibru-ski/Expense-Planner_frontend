@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/login'
 import Register from './pages/Register'
+import Calculators from './pages/Calculators'
 import Dashboard from './pages/Dashboard'
 import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth'
@@ -18,7 +19,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              {/* Add other routes here */}
+              <Route path='/calculators' element={<Calculators />}/>
             </Route>
           </Route>
         </Routes>

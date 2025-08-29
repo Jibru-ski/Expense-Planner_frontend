@@ -5,7 +5,7 @@ import { HiColorSwatch } from "react-icons/hi"
 const Dashboard = () => {
   return (
     <>
-      <h1 className='welcome-message'>Hello JDoe01👋</h1>
+      <Text fontSize={20} fontWeight={500} mb={5}><i class='bx bxs-dashboard'></i>Dashboard</Text>
       <Text fontSize={14} mb={2}>Payment Updates</Text>
       <HStack gap={5} mb={10}>
         <div className="stat-card">
