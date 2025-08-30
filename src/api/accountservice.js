@@ -1,8 +1,17 @@
 import api from "./api"
 
-export const getAccounts = async () => {
+export const getAccounts = async (userId) => {
   try {
-    const response = await api.get(`${API_BASE_URL}/accounts`);
+    const response = await api.get(`${API_BASE_URL}/accounts/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching accounts:", error);
+    throw error;
+  }
+}
+export const getAccountsSummary = async (userId) => {
+  try {
+    const response = await api.get(`${API_BASE_URL}/accounts/summary/${userId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching accounts:", error);
