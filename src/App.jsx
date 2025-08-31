@@ -4,6 +4,7 @@ import Login from './pages/login'
 import Register from './pages/Register'
 import Calculators from './pages/Calculators'
 import Dashboard from './pages/Dashboard'
+import Accounts from './pages/Accounts'
 import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth'
 import { Provider} from './components/ui/provider'
@@ -20,6 +21,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path='/calculators' element={<Calculators />}/>
+              <Route path='/accounts' element={<Accounts />}/>
             </Route>
           </Route>
         </Routes>

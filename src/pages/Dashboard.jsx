@@ -1,7 +1,7 @@
 import React from 'react'
 import { HStack, VStack, Icon, Stat, Text, Button, EmptyState, ButtonGroup } from '@chakra-ui/react'
 import { HiColorSwatch } from "react-icons/hi"
-import { getAccounts, getAccountsSummary } from '../api/accountservice';
+import { getAccounts } from '../api/accountservice';
 
 const Dashboard = () => {
   const [accounts, setAccounts] = React.useState([]);
