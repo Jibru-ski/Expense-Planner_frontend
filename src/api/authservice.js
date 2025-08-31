@@ -14,6 +14,7 @@ export async function registerService(userData) {
 export async function loginService(userData) {
     try {
         const res = await api.post("/auth/login", userData)
+        localStorage.setItem("user", JSON.stringify(res.data))
         return res.data   
     } catch (error) {
         console.error("Login error:", error.response?.data || error.message)
