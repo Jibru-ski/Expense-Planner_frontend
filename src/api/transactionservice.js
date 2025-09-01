@@ -2,7 +2,7 @@ import api from "./api"
 
 export const getTransactions = async () => {
   try {
-    const response = await api.get(`${API_BASE_URL}/transactions`);
+    const response = await api.get(`/transactions`);
     return response.data;
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -12,7 +12,7 @@ export const getTransactions = async () => {
 
 export const createTransaction = async (transactionData) => {
   try {
-    const response = await api.post(`${API_BASE_URL}/transactions`, transactionData);
+    const response = await api.post(`/transactions`, transactionData);
     return response.data;
   } catch (error) {
     console.error("Error creating transaction:", error);
@@ -22,7 +22,7 @@ export const createTransaction = async (transactionData) => {
 
 export const deleteTransaction = async (transactionId) => {
   try {
-    const response = await api.delete(`${API_BASE_URL}/transactions/${transactionId}`);
+    const response = await api.delete(`/transactions/${transactionId}`);
     return response.data;
   } catch (error) {
     console.error("Error deleting transaction:", error);

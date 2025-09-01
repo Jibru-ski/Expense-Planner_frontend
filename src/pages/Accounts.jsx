@@ -4,7 +4,7 @@ import { getAccounts } from '../api/accountservice'
 
 const Accounts = () => {
     const [accounts, setAccounts] = React.useState([]);
-    const [active, SetActive] = React.useState();
+    
     React.useEffect(() => {
         const fetchData = async () => {
             const accountData = await getAccounts();
