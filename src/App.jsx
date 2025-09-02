@@ -9,7 +9,6 @@ import Transactions from './pages/Transactions'
 import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth'
 import { Provider} from './components/ui/provider'
-import CreateTransaction from './pages/CreateTransaction'
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path='/calculators' element={<Calculators />}/>
               <Route path='/transactions' element={<Transactions />}/>
-              <Route path='/createTransaction' element={<CreateTransaction />}/>
               <Route path='/accounts' element={<Accounts />}/>
             </Route>
           </Route>
