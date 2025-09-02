@@ -3,11 +3,10 @@ import {Text, Kbd, Table, Checkbox, ActionBar, Portal, Button, IconButton, Radio
 import { createTransaction, getTransactions } from '../api/transactionservice'
 
 const Transactions = () => {
-    const [transactions, setTransactions] = React.useState([]);
-    const [selection, setSelection] = React.useState([])
     const [description, setDescription] = React.useState("");
     const [type, setType] = React.useState("");
     const [amount, setAmount] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
 
     // const hasSelection = selection.length > 0
     // const indeterminate = hasSelection && selection.length < items.length
@@ -25,56 +24,58 @@ const Transactions = () => {
     //     fetchTransactions();
     // }, [])
 
-    // const handleCreate = async (e) => {
-    //   e.preventDefault();
-    //   try {
-    //     const newTransaction = createTransaction({
-    //       description: (description),
-    //       type: (type),
-    //       amount: parseFloat(amount)
-    //     });
-    //     setTransactions(prev => [newTransaction, ...prev]);
-    //     setAmount("")
-    //     setDescription("")
-    //     setType("")
-    //   } catch (error) {
-        
-    //   }
-    // }
+    const clearInput = () => {
+      setAmount("")
+      setDescription("")
+      setType("")
+    }
 
-    // const cancleBtn = () => {
-    //   setAmount("")
-    //   setDescription("")
-    //   setType("")
-    // }
+    const handleCreate = async (e) => {
+      e.preventDefault();
+      try {
+        const transactionData = {
+          description: description,
+          type: parseInt(type),
+          amount: parseFloat(amount)
+        };
 
-    const rows = transactions.map((item) => (
-    <Table.Row data-selected={selection.includes(transactions.description) ? "" : undefined}>
-      <Table.Cell>
-        <Checkbox.Root
-          size="sm"
-          top="0.5"
-          aria-label="Select row"
-          checked={selection.includes(transactions.description)}
-          onCheckedChange={(changes) => {
-            setSelection((prev) =>
-              changes.checked
-                ? [...prev, transactions.description]
-                : selection.filter((name) => name !== transactions.description),
-            )
-          }}
-        >
-          <Checkbox.HiddenInput />
-          <Checkbox.Control />
-        </Checkbox.Root>
-      </Table.Cell>
-      <Table.Cell>{transactions.description}</Table.Cell>
-      <Table.Cell>{transactions.type}</Table.Cell>
-      <Table.Cell>${transactions.amount}</Table.Cell>
-      <Table.Cell>{transactions.createdOn}</Table.Cell>
-      <Table.Cell>{transactions.modifiedOn}</Table.Cell>
-    </Table.Row>
-    ));
+        await createTransaction(transactionData);
+        clearInput();
+      } catch (error) {
+        console.error("Failed to create Transaction: ", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+
+    // const rows = transactions.map((item) => (
+    // <Table.Row data-selected={selection.includes(transactions.description) ? "" : undefined}>
+    //   <Table.Cell>
+    //     <Checkbox.Root
+    //       size="sm"
+    //       top="0.5"
+    //       aria-label="Select row"
+    //       checked={selection.includes(transactions.type)}
+    //       onCheckedChange={(changes) => {
+    //         setSelection((prev) =>
+    //           changes.checked
+    //             ? [...prev, transactions.description]
+    //             : selection.filter((name) => name !== transactions.description),
+    //         )
+    //       }}
+    //     >
+    //       <Checkbox.HiddenInput />
+    //       <Checkbox.Control />
+    //     </Checkbox.Root>
+    //   </Table.Cell>
+    //   <Table.Cell>{transactions.description}</Table.Cell>
+    //   <Table.Cell>{transactions.type}</Table.Cell>
+    //   <Table.Cell>${transactions.amount}</Table.Cell>
+    //   <Table.Cell>{transactions.createdOn}</Table.Cell>
+    //   <Table.Cell>{transactions.modifiedOn}</Table.Cell>
+    // </Table.Row>
+    // ));
 
   return (
     <>
@@ -95,7 +96,7 @@ const Transactions = () => {
                   <Drawer.Title>Add Transaction</Drawer.Title>
                 </Drawer.Header>
                 <Drawer.Body>
-                  <Stack spacing={6} mb={4}>
+                  <Stack mb={4}>
                       <Input 
                           type="text" 
                           value={description}
@@ -106,12 +107,12 @@ const Transactions = () => {
                       />
                       <RadioGroup.Root value={type} onValueChange={(e) => setType(e.value)}>
                           <HStack gap="6">
-                              <RadioGroup.Item value="Income">
+                              <RadioGroup.Item value="0">
                                   <RadioGroup.ItemHiddenInput />
                                   <RadioGroup.ItemIndicator />
                                   <RadioGroup.ItemText>Income</RadioGroup.ItemText>
                               </RadioGroup.Item>
-                              <RadioGroup.Item value="Expense">
+                              <RadioGroup.Item value="1">
                                   <RadioGroup.ItemHiddenInput />
                                   <RadioGroup.ItemIndicator />
                                   <RadioGroup.ItemText>Expense</RadioGroup.ItemText>
@@ -129,12 +130,11 @@ const Transactions = () => {
                     </Stack>
                 </Drawer.Body>
                 <Drawer.Footer>
-                  <Button variant="outline" onClick={() => cancleBtn()}>Cancel</Button>
-                  <Button variant="surface" type="submit">Create</Button>
+                  <Button variant="outline" onClick={() => clearInput()}>Cancel</Button>
+                  <Button variant="surface" type="submit" disabled={loading}>
+                    {loading ? "Saving..." : "Create Transaction"}
+                  </Button>
                 </Drawer.Footer>
-                {/* <Drawer.CloseTrigger asChild>
-                  <CloseButton size="sm" />
-                </Drawer.CloseTrigger> */}
               </form>
             </Drawer.Content>
           </Drawer.Positioner>
